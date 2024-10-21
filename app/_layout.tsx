@@ -1,37 +1,43 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { useRouter } from 'expo-router';
+import { Toaster } from 'sonner-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { PostHogProvider } from 'posthog-react-native';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
+const POSTHOG_API_KEY = process.env.EXPO_PUBLIC_POSTHOG_API_KEY;
+const HOST = process.env.EXPO_PUBLIC_POSTHOG_HOST;
+if (!POSTHOG_API_KEY) {
+  throw new Error('Missing PostHog API Key. Please set EXPO_PUBLIC_POSTHOG_API_KEY in your .env');
+}
+/**
+ * Root layout component for the voice notes app
+ */
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
+  const router = useRouter();
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
+    <GestureHandlerRootView>
+      <PostHogProvider
+        apiKey={POSTHOG_API_KEY}
+        debug={true}
+        options={{
+          host: HOST,
+        }}>
+        <Toaster />
+        <Stack>
+          <Stack.Screen name="index" options={{ title: 'Voice Notes' }} />
+          <Stack.Screen
+            name="new-recording"
+            options={{
+              title: 'New Recording',
+              presentation: 'modal',
+              headerLeft: () => (
+                <Ionicons name="close" size={24} color="black" onPress={() => router.back()} />
+              ),
+            }}
+          />
+        </Stack>
+      </PostHogProvider>
+    </GestureHandlerRootView>
   );
 }

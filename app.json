@@ -13,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.supersimon.voice-recorder"
     },
     "android": {
       "adaptiveIcon": {
@@ -27,7 +28,19 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      [
+        "expo-router",
+        {
+          "origin": "https://galaxies.dev/"
+        }
+      ],
+      "expo-localization",
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
