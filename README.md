@@ -1,50 +1,64 @@
-# Welcome to your Expo app 👋
+# AI Voice Recorder & Note Taking App with PostHog
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Record your voice and take notes with AI transcription. Store your notes in the cloud and sync them across all your devices using Firebase. Watch how users interact with your app and replay sessions to understand how to improve your app using [PostHog](http://posthog.com/simongrimm).
 
-## Get started
 
-1. Install dependencies
+## Technologies Used
 
-   ```bash
+- React Native
+- Expo
+- Firebase Firestore
+- [PostHog](http://posthog.com/simongrimm) for analytics and session replays
+- expo-router for navigation
+- expo-av for voice recording
+- sonner-native for toast notifications
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js
+- Expo CLI
+- Firebase account
+
+### Installation
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/Galaxies-dev/ai-voice-recorder
+   ```
+
+2. Navigate to the project directory:
+   ```
+   cd ai-voice-recorder
+   ```
+
+3. Install dependencies:
+   ```
    npm install
    ```
 
-2. Start the app
+4. Set up your Firebase configuration in `utils/FirebaseConfig.ts`
 
-   ```bash
-    npx expo start
+5. Create your own `.env` file and insert your credentials.
+
+6. Start the Expo development server:
+   ```
+   npx expo run:android
    ```
 
-In the output, you'll find options to open the app in a
+## Project Structure
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- `app/index.tsx`: Main screen with the list of notes
+- `app/new-recording.tsx`: Transcription screen
+- `app/[id].tsx`: Screen for editing and deleting a specific note
+- `utils/FirebaseConfig.ts`: Firebase configuration
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## Get a fresh project
+## 🚀 More
 
-When you're ready, run:
+**Take a shortcut from web developer to mobile development fluency with guided learning**
 
-```bash
-npm run reset-project
-```
+Enjoyed this project? Learn to use React Native to build production-ready, native mobile apps for both iOS and Android based on your existing web development skills.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+<a href="https://galaxies.dev"><img src="banner.png" height="auto" width="100%"></a>
