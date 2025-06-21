@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { FIRESTORE_DB, NOTE_COLLECTION } from '@/utils/FirebaseConfig';
+import { usePostHog } from 'posthog-react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { toast } from 'sonner-native';
-import { usePostHog } from 'posthog-react-native'
 
 /**
  * Page component for handling new audio recordings and their transcription.
@@ -66,11 +64,11 @@ const Page = () => {
    * Handles saving the transcription to Firestore.
    */
   const handleSave = async () => {
-    addDoc(collection(FIRESTORE_DB, NOTE_COLLECTION), {
-      preview: transcription.length > 40 ? transcription.slice(0, 40) + '...' : transcription,
-      text: transcription,
-      createdAt: serverTimestamp(),
-    });
+    // addDoc(collection(FIRESTORE_DB, NOTE_COLLECTION), {
+    //   preview: transcription.length > 40 ? transcription.slice(0, 40) + '...' : transcription,
+    //   text: transcription,
+    //   createdAt: serverTimestamp(),
+    // });
 
     router.dismissAll();
   };
